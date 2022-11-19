@@ -2,9 +2,13 @@
 {
     internal class Card
     {
-        String[] cards_of_player = { };
-        String[] cards_of_computer = { };
+        public String[] cards_of_player = { };
+        public String[] cards_of_computer = { };
 
+        /// <summary>
+        /// This function displays the cards of the player or the computer
+        /// </summary>
+        /// <param name="String">player</param>
         public void displayCards(String player)
         {
             if (player.Equals("player"))
@@ -24,6 +28,12 @@
             }
         }
 
+        /// <summary>
+        /// It takes a string as a parameter and if the string is equal to "player" it creates a new
+        /// array of strings that is one element larger than the current array of strings and copies the
+        /// contents of the old array to the new array
+        /// </summary>
+        /// <param name="String">player</param>
         public void extendsCards(String player)
         {
             if (player.Equals("player"))
@@ -41,6 +51,11 @@
             }
         }
 
+        /// <summary>
+        /// It adds new card to the player cards
+        /// </summary>
+        /// <param name="String">player</param>
+        /// <param name="String">card_of_player</param>
         public void addCard(String player, String card_of_player)
         {
             extendsCards(player);

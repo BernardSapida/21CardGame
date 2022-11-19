@@ -4,18 +4,27 @@ namespace Program
 {
     class Program
     {
-        private Deck deck = new Deck();
-        private Hand hand_of_player = new Hand();
-        private Hand hand_of_computer = new Hand();
-        private Card card = new Card();
-        private static String drawCard = "";
+        public Hand hand_of_player = new Hand();
+        public Hand hand_of_computer = new Hand();
+        public Deck deck = new Deck();
+        public Card card = new Card();
+        public static String drawCard = "";
 
+        /// <summary>
+        /// The main function is the entry point of the program
+        /// </summary>
+        /// <param name="args">The command-line arguments.</param>
         static void Main(string[] args)
         {
             Program main = new Program();
             main.startGame();
         }
 
+        /// <summary>
+        /// The function starts the game by drawing two cards for the player and the computer, then it
+        /// loops through the player and computer playing their hands until one of them has a hand value
+        /// of 21 or greater.
+        /// </summary>
         public void startGame()
         {
             drawTwoCards();
@@ -28,22 +37,29 @@ namespace Program
 
                 if (hand_of_player.obtainHandValue() >= 21 && hand_of_computer.obtainHandValue() >= 21)
                 {
-                    checkWinner();
+                    displayResult();
                     break;
                 }
             }
         }
 
+        /// <summary>
+        /// The function draws two cards for the player and two cards for the computer
+        /// </summary>
         public void drawTwoCards()
         {
             deck.shuffleDeck();
             draw("player");
             draw("player");
             Console.WriteLine("Total hand value is " + hand_of_player.obtainHandValue());
+            Console.WriteLine("\n*************************************\n");
             draw("computer");
             draw("computer");
         }
 
+        /// <summary>
+        /// If the computer's hand value is less than 21, the computer will draw a card
+        /// </summary>
         public void computerPlay()
         {
             Random random = new Random();
@@ -59,11 +75,15 @@ namespace Program
             }
         }
 
+        /// <summary>
+        /// If the player's hand value is less than or equal to 21, and the player chooses to draw, then
+        /// draw a card for the player.
+        /// </summary>
         public void playerPlay()
         {
             if (hand_of_player.obtainHandValue() <= 21)
             {
-                if (queryInput().Equals("1"))
+                if (askUserInput().Equals("1"))
                 {
                     draw("player");
                     Console.WriteLine("Total hand value is " + hand_of_player.obtainHandValue());
@@ -77,7 +97,14 @@ namespace Program
             }
         }
 
-        public String queryInput()
+        /// <summary>
+        /// It asks the user to input a choice, and if the choice is not 1 or 2, it will ask the user to
+        /// input again until the choice is 1 or 2.
+        /// </summary>
+        /// <returns>
+        /// The user's choice.
+        /// </returns>
+        public String askUserInput()
         {
             Console.WriteLine("Player, would you like to draw or pass?");
             Console.WriteLine("[1] Draw");
@@ -102,6 +129,10 @@ namespace Program
             return user_choice;
         }
 
+        /// <summary>
+        /// The function draws a card from the deck and adds it to the player's hand
+        /// </summary>
+        /// <param name="String">player</param>
         public void draw(String player)
         {
             if (player.Equals("player"))
@@ -120,7 +151,10 @@ namespace Program
             }
         }
 
-        public void checkWinner()
+        /// <summary>
+        /// It displays the result of the game
+        /// </summary>
+        public void displayResult()
         {
             if((hand_of_player.obtainHandValue() > 21 && hand_of_computer.obtainHandValue() > 21) || (hand_of_player.obtainHandValue() > 21 && hand_of_computer.obtainHandValue() == 21))
             {

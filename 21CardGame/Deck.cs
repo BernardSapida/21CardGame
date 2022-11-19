@@ -2,7 +2,7 @@
 {
     internal class Deck
     {
-        String[] deck =
+        public String[] deck =
         {
             "Ace of Spades",
             "2 of Spades",
@@ -60,11 +60,15 @@
             "King of Diamonds",
             "Queen of Diamonds",
         };
-        String[] shuffledDeck = new string[52];
-        Random random = new Random();
+        public String[] shuffledDeck = new string[52];
 
+        /// <summary>
+        /// The function shuffles the deck by randomly ordering the cards in the deck.
+        /// </summary>
         public void shuffleDeck()
         {
+            Random random = new Random();
+
             Console.WriteLine("*************************************\n");
             Console.WriteLine("Start shuffling deck...");
             shuffledDeck = deck.OrderBy(c => random.Next()).ToArray();
@@ -72,8 +76,17 @@
             Console.WriteLine("\n*************************************\n");
         }
 
+        /// <summary>
+        /// It returns a random card from the shuffled deck, and marks it as "DREW" so that it won't be
+        /// drawn again
+        /// </summary>
+        /// <returns>
+        /// A random card from the deck.
+        /// </returns>
         public String drawCard()
         {
+            Random random = new Random();
+
             long index = random.NextInt64(0, 52);
             String card_drew = shuffledDeck[index];
 
