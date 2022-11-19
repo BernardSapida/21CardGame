@@ -2,31 +2,24 @@
 {
     internal class Card
     {
-        String[] player_cards = { };
-        String[] computer_cards = { };
-
-        public void addCard(String player, String card)
-        {
-            extendsCards(player);
-            if (player.Equals("player")) player_cards[player_cards.Length - 1] = card;
-            if (player.Equals("computer")) computer_cards[computer_cards.Length - 1] = card;
-        }
+        String[] cards_of_player = { };
+        String[] cards_of_computer = { };
 
         public void displayCards(String player)
         {
             if (player.Equals("player"))
             {
-                for (int i = 0; i < player_cards.Length; i++)
+                for (int i = 0; i < cards_of_player.Length; i++)
                 {
-                    Console.WriteLine(player_cards[i]);
+                    Console.WriteLine(cards_of_player[i]);
                 }
             }
 
             if (player.Equals("computer"))
             {
-                for (int i = 0; i < computer_cards.Length; i++)
+                for (int i = 0; i < cards_of_computer.Length; i++)
                 {
-                    Console.WriteLine(computer_cards[i]);
+                    Console.WriteLine(cards_of_computer[i]);
                 }
             }
         }
@@ -35,16 +28,30 @@
         {
             if (player.Equals("player"))
             {
-                String[] temp = new string[player_cards.Length + 1];
-                player_cards.CopyTo(temp, 0);
-                player_cards = temp;
+                String[] temp = new string[cards_of_player.Length + 1];
+                cards_of_player.CopyTo(temp, 0);
+                cards_of_player = temp;
             }
 
             if (player.Equals("computer"))
             {
-                String[] temp = new string[computer_cards.Length + 1];
-                computer_cards.CopyTo(temp, 0);
-                computer_cards = temp;
+                String[] temp = new string[cards_of_computer.Length + 1];
+                cards_of_computer.CopyTo(temp, 0);
+                cards_of_computer = temp;
+            }
+        }
+
+        public void addCard(String player, String playerCard)
+        {
+            extendsCards(player);
+            if (player.Equals("player"))
+            {
+                cards_of_player[cards_of_player.Length - 1] = playerCard;
+            }
+
+            if (player.Equals("computer"))
+            {
+                cards_of_computer[cards_of_computer.Length - 1] = playerCard;
             }
         }
     }

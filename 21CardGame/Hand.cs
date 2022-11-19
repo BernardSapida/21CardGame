@@ -2,24 +2,34 @@
 {
     internal class Hand
     {
-        int handValue;
+        int value_in_hand;
 
-        public void displayHandValue()
+        public void incrementHandValue(String playerCard)
         {
-            Console.WriteLine("Total hand value is " + handValue);
+            String card_drew = playerCard.Split(" ")[0];
+
+            if (card_drew.Equals("Ace"))
+            {
+                value_in_hand += 11;
+            }
+            else if (card_drew.Equals("Queen") || card_drew.Equals("King") || card_drew.Equals("Jack"))
+            {
+                value_in_hand += 10;
+            }
+            else
+            {
+                value_in_hand += Convert.ToInt16(card_drew);
+            }
         }
 
-        public int getHandValue()
+        public int obtainHandValue()
         {
-            return handValue;
+            return value_in_hand;
         }
-
-        public void addHandValue(String card)
+        
+        public void printHandValue()
         {
-            String drewCard = card.Split(" ")[0];
-            if (drewCard.Equals("Ace")) handValue += 11;
-            else if (drewCard.Equals("Jack") || drewCard.Equals("King") || drewCard.Equals("Queen")) handValue += 10;
-            else handValue += Convert.ToInt16(drewCard);
+            Console.WriteLine("Total hand value is " + value_in_hand);
         }
     }
 }
