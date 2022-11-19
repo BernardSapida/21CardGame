@@ -12,7 +12,6 @@
         static void Main(string[] args)
         {
             Program main = new Program();
-
             main.startGame();
         }
 
