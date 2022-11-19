@@ -2,49 +2,43 @@
 {
     internal class Card
     {
-        String[] player_cards = { };
-        String[] computer_cards = { };
+        String[] playerCards = { };
+        String[] computerCards = { };
 
-        public void addCard(String player, String card)
+        public void addCard(String currentPlayer, String card)
         {
-            extendsCards(player);
-            if (player.Equals("player")) player_cards[player_cards.Length - 1] = card;
-            if (player.Equals("computer")) computer_cards[computer_cards.Length - 1] = card;
+            extendsCardsLength(currentPlayer);
+            if (currentPlayer.Equals("player")) playerCards[playerCards.Length - 1] = card;
+            if (currentPlayer.Equals("computer")) computerCards[computerCards.Length - 1] = card;
         }
 
-        public void displayCards(String player)
+        public void displayCards(String currentPlayer)
         {
-            if (player.Equals("player"))
+            if (currentPlayer.Equals("player"))
             {
-                for (int i = 0; i < player_cards.Length; i++)
-                {
-                    Console.WriteLine(player_cards[i]);
-                }
+                for (int i = 0; i < playerCards.Length; i++) Console.WriteLine(playerCards[i]);
             }
 
-            if (player.Equals("computer"))
+            if (currentPlayer.Equals("computer"))
             {
-                for (int i = 0; i < computer_cards.Length; i++)
-                {
-                    Console.WriteLine(computer_cards[i]);
-                }
+                for (int i = 0; i < computerCards.Length; i++) Console.WriteLine(computerCards[i]);
             }
         }
 
-        public void extendsCards(String player)
+        public void extendsCardsLength(String currentPlayer)
         {
-            if (player.Equals("player"))
+            if (currentPlayer.Equals("player"))
             {
-                String[] temp = new string[player_cards.Length + 1];
-                player_cards.CopyTo(temp, 0);
-                player_cards = temp;
+                String[] tempArray = new string[playerCards.Length + 1];
+                playerCards.CopyTo(tempArray, 0);
+                playerCards = tempArray;
             }
 
-            if (player.Equals("computer"))
+            if (currentPlayer.Equals("computer"))
             {
-                String[] temp = new string[computer_cards.Length + 1];
-                computer_cards.CopyTo(temp, 0);
-                computer_cards = temp;
+                String[] tempArray = new string[computerCards.Length + 1];
+                computerCards.CopyTo(tempArray, 0);
+                computerCards = tempArray;
             }
         }
     }

@@ -2,29 +2,37 @@
 {
     class Program
     {
-        Card card = new Card();
-        Deck deck = new Deck();
-        Hand playerHand = new Hand();
-        Hand computerHand = new Hand();
-        Boolean haveWinner = false;
-        static String drawCard = "";
+        public Card card = new Card();
+        public Deck deck = new Deck();
+        public Hand playerHand = new Hand();
+        public Hand computerHand = new Hand();
+        public Boolean haveWinner = false;
+        public static String drawCard = "";
 
         static void Main(string[] args)
         {
-            Program main = new Program();
+            Program program = new Program();
 
-            main.startGame();
+            program.startGame();
         }
 
         public void startGame()
         {
-            firstDrawCard();
+            deck.shuffleDeck();
 
-            while(!haveWinner)
+            draw("player");
+            draw("player");
+            Console.WriteLine("Total hand value is " + playerHand.getHandValue());
+            Console.WriteLine("\n----------------------------------------\n");
+
+            draw("computer");
+            draw("computer");
+
+            while (!haveWinner)
             {
-                playerTurns();
-                computerTurns();
-                Console.WriteLine("\n=====================================\n");
+                turnPlayer();
+                turnComputer();
+                Console.WriteLine("\n----------------------------------------\n");
 
                 if (playerHand.getHandValue() >= 21 && computerHand.getHandValue() >= 21)
                 {
@@ -32,19 +40,6 @@
                     break;
                 }
             }
-        }
-
-        public void firstDrawCard()
-        {
-            // Shuffling deck
-            deck.shuffleDeck();
-
-            draw("player");
-            draw("player");
-            Console.WriteLine("Total hand value is " + playerHand.getHandValue());
-
-            draw("computer");
-            draw("computer");
         }
 
         public String queryChoice()
@@ -55,13 +50,13 @@
             while(!(choice.Equals("1") || choice.Equals("2")))
             {
                 Console.WriteLine("Your answer is not accepted!");
-                Console.WriteLine("\n=====================================\n");
+                Console.WriteLine("\n----------------------------------------\n");
                 Console.Write("Player, would you like to draw or pass?\n[1] Draw\n[2] Pass\nChoice: ");
                 choice = Console.ReadLine();
             }
 
             Console.WriteLine("Choice accepted...");
-            Console.WriteLine("\n=====================================\n");
+            Console.WriteLine("\n----------------------------------------\n");
 
             return choice;
         }
@@ -70,7 +65,7 @@
         {
             if (player.Equals("player"))
             {
-                drawCard = deck.drawCard();
+                drawCard = deck.drawNewCard();
                 Console.WriteLine("Player drew " + drawCard);
                 card.addCard("player", drawCard);
                 playerHand.addHandValue(drawCard);
@@ -78,7 +73,7 @@
 
             if (player.Equals("computer"))
             {
-                drawCard = deck.drawCard();
+                drawCard = deck.drawNewCard();
                 card.addCard("computer", drawCard);
                 computerHand.addHandValue(drawCard);
             }
@@ -89,19 +84,19 @@
             Console.WriteLine(player + " passed...");
         }
 
-        public void computerTurns()
+        public void turnComputer()
         {
             Random random = new Random();
 
-            if(((random.NextInt64(1, 3) == 1 && computerHand.getHandValue() != 21) && computerHand.getHandValue() < 21) || (playerHand.getHandValue() > 21 && computerHand.getHandValue() < 21) || computerHand.getHandValue() < 21)
+            if(random.NextInt64(1, 3) == 2 || computerHand.getHandValue() > 21) pass("computer");
+            else if ((computerHand.getHandValue() != 21 && computerHand.getHandValue() < 21) || (playerHand.getHandValue() > 21 && computerHand.getHandValue() < 21) || computerHand.getHandValue() < 21)
             {
                 draw("computer");
                 Console.WriteLine("Computer drew a card.");
             }
-            else pass("computer");
         }
 
-        public void playerTurns()
+        public void turnPlayer()
         {
             if (playerHand.getHandValue() <= 21)
             {
@@ -109,12 +104,13 @@
                 {
                     draw("player");
                     Console.WriteLine("Total hand value is " + playerHand.getHandValue());
+                    Console.WriteLine("\n----------------------------------------\n");
                 }
             }
             else
             {
                 Console.WriteLine("No hope for victory");
-                Console.WriteLine("\n=====================================\n");
+                Console.WriteLine("\n----------------------------------------\n");
             }
 
         }
@@ -128,10 +124,12 @@
                 Console.WriteLine("\n------------------ VS ------------------\n");
                 Console.WriteLine("Hand of Computer with a value of " + computerHand.getHandValue());
                 card.displayCards("computer");
+                Console.WriteLine("\n----------------------------------------\n");
                 Console.WriteLine("You lose! Try again next time!");
             }
             else if (playerHand.getHandValue() == 21 && computerHand.getHandValue() == 21)
             {
+                Console.WriteLine("\n----------------------------------------\n");
                 Console.WriteLine("Game ends in a draw!");
             }
             else if (playerHand.getHandValue() == 21 && computerHand.getHandValue() > 21)
@@ -141,6 +139,7 @@
                 Console.WriteLine("\n------------------ VS ------------------\n");
                 Console.WriteLine("Hand of Computer with a value of " + computerHand.getHandValue());
                 card.displayCards("computer");
+                Console.WriteLine("\n----------------------------------------\n");
                 Console.WriteLine("Congratulations! You win!");
             }
         }

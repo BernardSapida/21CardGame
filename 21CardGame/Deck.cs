@@ -65,25 +65,25 @@
 
         public void shuffleDeck()
         {
-            Console.WriteLine("=====================================\n");
+            Console.WriteLine("----------------------------------------\n");
             Console.WriteLine("Start shuffling deck...");
             shuffledDeck = deck.OrderBy(c => random.Next()).ToArray();
             Console.WriteLine("Done shuffling deck...");
-            Console.WriteLine("\n=====================================\n");
+            Console.WriteLine("\n----------------------------------------\n");
         }
 
-        public String drawCard()
+        public String drawNewCard()
         {
             long DREW_CARD_INDEX = random.NextInt64(0, 52);
             String DREW_CARD = shuffledDeck[DREW_CARD_INDEX];
 
-            while (DREW_CARD == "DREW")
+            while(DREW_CARD == "EMPTY")
             {
                 DREW_CARD_INDEX = random.NextInt64(0, 52);
                 DREW_CARD = shuffledDeck[DREW_CARD_INDEX];
             }
 
-            shuffledDeck[DREW_CARD_INDEX] = "DREW";
+            shuffledDeck[DREW_CARD_INDEX] = "EMPTY";
 
             return DREW_CARD;
         }
