@@ -41,17 +41,17 @@
             }
         }
 
-        public void addCard(String player, String playerCard)
+        public void addCard(String player, String card_of_player)
         {
             extendsCards(player);
             if (player.Equals("player"))
             {
-                cards_of_player[cards_of_player.Length - 1] = playerCard;
+                cards_of_player[cards_of_player.Length - 1] = card_of_player;
             }
 
             if (player.Equals("computer"))
             {
-                cards_of_computer[cards_of_computer.Length - 1] = playerCard;
+                cards_of_computer[cards_of_computer.Length - 1] = card_of_player;
             }
         }
     }
