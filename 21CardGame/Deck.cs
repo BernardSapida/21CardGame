@@ -2,7 +2,7 @@
 {
     internal class Deck
     {
-        String[] deck =
+        private String[] deck =
         {
             "Ace of Spades",
             "2 of Spades",
@@ -17,7 +17,6 @@
             "Jack of Spades",
             "King of Spades",
             "Queen of Spades",
-
             "Ace of Hearts",
             "2 of Hearts",
             "3 of Hearts",
@@ -31,7 +30,6 @@
             "Jack of Hearts",
             "King of Hearts",
             "Queen of Hearts",
-
             "Ace of Clubs",
             "2 of Clubs",
             "3 of Clubs",
@@ -45,7 +43,6 @@
             "Jack of Clubs",
             "King of Clubs",
             "Queen of Clubs",
-
             "Ace of Diamonds",
             "2 of Diamonds",
             "3 of Diamonds",
@@ -60,9 +57,12 @@
             "King of Diamonds",
             "Queen of Diamonds",
         };
-        String[] shuffledDeck = new string[52];
-        Random random = new Random();
+        private String[] shuffledDeck = new string[52];
+        private Random random = new Random();
 
+        /// <summary>
+        /// It takes the deck of cards and randomly shuffles them
+        /// </summary>
         public void shuffleDeck()
         {
             Console.WriteLine("----------------------------------------\n");
@@ -72,6 +72,13 @@
             Console.WriteLine("\n----------------------------------------\n");
         }
 
+        /// <summary>
+        /// It returns a random card from the shuffled deck, and then marks that card as "EMPTY" so that
+        /// it can't be drawn again.
+        /// </summary>
+        /// <returns>
+        /// A card from the deck.
+        /// </returns>
         public String drawNewCard()
         {
             long DREW_CARD_INDEX = random.NextInt64(0, 52);
