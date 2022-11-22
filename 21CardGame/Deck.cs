@@ -67,6 +67,7 @@
         {
             Console.WriteLine("----------------------------------------\n");
             Console.WriteLine("Start shuffling deck...");
+            /* Taking the deck of cards and randomly shuffling them. */
             shuffledDeck = deck.OrderBy(c => random.Next()).ToArray();
             Console.WriteLine("Done shuffling deck...");
             Console.WriteLine("\n----------------------------------------\n");
@@ -84,12 +85,15 @@
             long DREW_CARD_INDEX = random.NextInt64(0, 52);
             String DREW_CARD = shuffledDeck[DREW_CARD_INDEX];
 
+            /* Checking to see if the card that was drawn is empty. If it is, then it will draw a new
+            card. */
             while(DREW_CARD == "EMPTY")
             {
                 DREW_CARD_INDEX = random.NextInt64(0, 52);
                 DREW_CARD = shuffledDeck[DREW_CARD_INDEX];
             }
 
+            /* Marking the card that was drawn as "EMPTY" so that it can't be drawn again. */
             shuffledDeck[DREW_CARD_INDEX] = "EMPTY";
 
             return DREW_CARD;

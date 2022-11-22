@@ -9,6 +9,7 @@
         /// </summary>
         public void displayHandValue()
         {
+            /* Printing the total value of the hand. */
             Console.WriteLine("Total hand value is " + handValue);
         }
 
@@ -30,7 +31,11 @@
         /// <param name="String">card</param>
         public void addHandValue(String card)
         {
+            /* Splitting the string into an array of strings, and then adding the value of the card to
+            the handValue variable. */
             String drewCard = card.Split(" ")[0];
+
+            /* Adding the value of the card to the handValue variable. */
             if (drewCard.Equals("Ace")) handValue += 11;
             else if (drewCard.Equals("Jack") || drewCard.Equals("King") || drewCard.Equals("Queen")) handValue += 10;
             else handValue += Convert.ToInt16(drewCard);
