@@ -29,18 +29,14 @@ namespace Program
         {
             drawTwoCards();
 
-            while(true)
-            {
-                playerPlay();
-                computerPlay();
-                Console.WriteLine("\n*************************************\n");
-
-                if (hand_of_player.obtainHandValue() >= 21 && hand_of_computer.obtainHandValue() >= 21)
-                {
-                    displayResult();
-                    break;
-                }
-            }
+            playerPlay();
+            if(hand_of_player.obtainHandValue() <= 21) computerPlay();
+            Console.WriteLine("\n*************************************\n");
+            card.displayCards("player");
+            Console.WriteLine("\n------------------ VS ------------------\n");
+            card.displayCards("computer");
+            Console.WriteLine("\n----------------------------------------\n");
+            displayResult();
         }
 
         /// <summary>
@@ -62,16 +58,10 @@ namespace Program
         /// </summary>
         public void computerPlay()
         {
-            Random random = new Random();
-
-            if(((random.NextInt64(1, 3) == 1 && hand_of_computer.obtainHandValue() != 21) && hand_of_computer.obtainHandValue() < 21) || (hand_of_player.obtainHandValue() > 21 && hand_of_computer.obtainHandValue() < 21) || hand_of_computer.obtainHandValue() < 21)
+            while (hand_of_computer.obtainHandValue() < 17)
             {
                 draw("computer");
                 Console.WriteLine("Computer drew a card.");
-            }
-            else
-            {
-                Console.WriteLine("Computer passed...");
             }
         }
 
@@ -81,19 +71,17 @@ namespace Program
         /// </summary>
         public void playerPlay()
         {
-            if (hand_of_player.obtainHandValue() <= 21)
+            while (hand_of_player.obtainHandValue() < 21)
             {
                 if (askUserInput().Equals("1"))
                 {
                     draw("player");
                     Console.WriteLine("Total hand value is " + hand_of_player.obtainHandValue());
-                    Console.WriteLine("\n*************************************\n");
+                    Console.WriteLine("\n----------------------------------------\n");
+
+                    if (hand_of_player.obtainHandValue() > 21) Console.WriteLine("No hope for victory");
                 }
-            }
-            else
-            {
-                Console.WriteLine("No hope for victory");
-                Console.WriteLine("\n*************************************\n");
+                else break;
             }
         }
 
@@ -156,26 +144,25 @@ namespace Program
         /// </summary>
         public void displayResult()
         {
-            if((hand_of_player.obtainHandValue() > 21 && hand_of_computer.obtainHandValue() > 21) || (hand_of_player.obtainHandValue() > 21 && hand_of_computer.obtainHandValue() == 21))
+            if (hand_of_player.obtainHandValue() > 21 && hand_of_computer.obtainHandValue() < 21) Console.WriteLine("Game ended. You are BUST!");
+            else if ((hand_of_player.obtainHandValue() == 21 && hand_of_computer.obtainHandValue() == 21) || (hand_of_player.obtainHandValue() == hand_of_computer.obtainHandValue()))
             {
-                Console.WriteLine("Hand of Player with a value of " + hand_of_player.obtainHandValue());
-                card.displayCards("player");
-                Console.WriteLine("\n***************** VS *****************\n");
-                Console.WriteLine("Hand of Computer with a value of " + hand_of_computer.obtainHandValue());
-                card.displayCards("computer");
-                Console.WriteLine("You lose! Try again next time!");
+                Console.WriteLine("Game ended in DRAW!");
             }
-            else if (hand_of_player.obtainHandValue() == 21 && hand_of_computer.obtainHandValue() == 21)
+            else if (
+                (hand_of_computer.obtainHandValue() == 21) ||
+                ((hand_of_computer.obtainHandValue() < 21 && hand_of_player.obtainHandValue() > 21) ||
+                ((hand_of_computer.obtainHandValue() < 21 && hand_of_player.obtainHandValue() < 21) && (hand_of_computer.obtainHandValue() > hand_of_player.obtainHandValue())))
+            )
             {
-                Console.WriteLine("Game ends in a draw!");
+                Console.WriteLine("Game ended. Dealer wins!");
             }
-            else if (hand_of_player.obtainHandValue() == 21 && hand_of_computer.obtainHandValue() > 21)
+            else if (
+                (hand_of_player.obtainHandValue() == 21) ||
+                (hand_of_player.obtainHandValue() < 21 && hand_of_computer.obtainHandValue() > 21) ||
+                ((hand_of_player.obtainHandValue() < 21 && hand_of_computer.obtainHandValue() < 21) && (hand_of_player.obtainHandValue() > hand_of_computer.obtainHandValue()))
+            )
             {
-                Console.WriteLine("Hand of Player with a value of " + hand_of_player.obtainHandValue());
-                card.displayCards("player");
-                Console.WriteLine("\n***************** VS *****************\n");
-                Console.WriteLine("Hand of Computer with a value of " + hand_of_computer.obtainHandValue());
-                card.displayCards("computer");
                 Console.WriteLine("Congratulations! You win!");
             }
         }
