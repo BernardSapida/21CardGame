@@ -44,7 +44,7 @@
             draw("computer");
 
             turnPlayer();
-            if(playerHand.getHandValue() < 21) turnComputer();
+            if(playerHand.getHandValue() <= 21) turnComputer();
             Console.WriteLine("\n----------------------------------------\n");
             card.displayCards("player");
             Console.WriteLine("\n------------------ VS ------------------\n");
