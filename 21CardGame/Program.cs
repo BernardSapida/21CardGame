@@ -43,13 +43,21 @@
             draw("computer");
             draw("computer");
 
+            /* Calling the turnPlayer() function. */
             turnPlayer();
+
+            /* Checking if the player's hand value is less than or equal to 21. If it is, it will call
+            the turnComputer() function. */
             if(playerHand.getHandValue() <= 21) turnComputer();
+
             Console.WriteLine("\n----------------------------------------\n");
+            /* Displaying the cards in the player's hand. */
             card.displayCards("player");
             Console.WriteLine("\n------------------ VS ------------------\n");
+            /* Displaying the cards in the computer's hand. */
             card.displayCards("computer");
             Console.WriteLine("\n----------------------------------------\n");
+            /* Calling the assessWinner() function. */
             assessWinner();
         }
 
@@ -118,9 +126,9 @@
             Console.WriteLine(player + " passed...");
         }
 
+        
         /// <summary>
-        /// If the computer's hand value is greater than 21, pass. If the computer's hand value is less
-        /// than 21, draw. If the computer's hand value is 21, pass
+        /// The computer draws a card until its hand value is greater than or equal to 17
         /// </summary>
         public void turnComputer()
         {
@@ -131,24 +139,35 @@
             }
         }
 
+        
         /// <summary>
-        /// If the player's hand value is less than or equal to 21, and the player chooses to draw, then
-        /// draw a card for the player and display the player's hand value
+        /// The function is called turnPlayer() and it's purpose is to allow the player to draw cards
+        /// until they either bust or decide to stand
         /// </summary>
         public void turnPlayer()
         {
-            /* Checking if the player's hand value is less than or equal to 21. If it is, it will ask
-            the user to choose between two options. If the user chooses to draw, it will draw a card
-            for the player and display the player's hand value. If the player's hand value is
-            greater than 21, it will display a message. */
+            /* Checking if the player's hand value is less than 21. If it is, it will check if the
+            user's choice is equal to 1. If it is, it will draw a card for the player, display the
+            total hand value of the player, and if the player's hand value is greater than 21, it
+            will display a message. If the user's choice is not equal to 1, it will break out of the
+            loop. */
             while(playerHand.getHandValue() < 21)
             {
+                /* Checking if the user's choice is equal to 1. If it is, it will draw a card for the
+                player, display the total hand value of the player, and if the player's hand value
+                is greater than 21, it will display a message. If the user's choice is not equal to
+                1, it will break out of the loop. */
                 if (queryChoice().Equals("1"))
                 {
+                    /* Calling the draw function and passing the string "player" as an argument. */
                     draw("player");
+
+                    /* Displaying the total hand value of the player. */
                     Console.WriteLine("Total hand value is " + playerHand.getHandValue());
                     Console.WriteLine("\n----------------------------------------\n");
 
+                    /* Checking if the player's hand value is greater than 21. If it is, it will
+                    display a message. */
                     if(playerHand.getHandValue() > 21) Console.WriteLine("No hope for victory");
                 }
                 else break;
@@ -160,11 +179,25 @@
         /// </summary>
         public void assessWinner()
         {
+            /* Checking if the player's hand value is greater than 21 and the computer's hand value is
+            less than 21. If it is, it will display a message. */
             if(playerHand.getHandValue() > 21 && computerHand.getHandValue() < 21) Console.WriteLine("Game ended. You are BUST!");
-            else if((playerHand.getHandValue() == 21 && computerHand.getHandValue() == 21) || (playerHand.getHandValue() == computerHand.getHandValue()))
+
+            /* Checking if the player's hand value is equal to 21 and the computer's hand value is
+            equal to 21, or if the player's hand value is equal to the computer's hand value. If it
+            is, it will display a message. */
+            else if(
+                (playerHand.getHandValue() == 21 && computerHand.getHandValue() == 21) || 
+                (playerHand.getHandValue() == computerHand.getHandValue())
+            )
             {
                 Console.WriteLine("Game ended in DRAW!");
             }
+
+            /* Checking if the computer's hand value is equal to 21, or if the computer's hand value is
+            less than 21 and the player's hand value is greater than 21, or if the computer's hand
+            value is less than 21 and the player's hand value is less than 21 and the computer's
+            hand value is greater than the player's hand value. */
             else if(
                 (computerHand.getHandValue() == 21) ||
                 ((computerHand.getHandValue() < 21 && playerHand.getHandValue() > 21) ||
@@ -173,6 +206,11 @@
             {
                 Console.WriteLine("Game ended. Dealer wins!");
             }
+
+            /* Checking if the player's hand value is equal to 21, or if the player's hand value is
+            less than 21 and the computer's hand value is greater than 21, or if the player's hand
+            value is less than 21 and the computer's hand value is less than 21 and the player's
+            hand value is greater than the computer's hand value. */
             else if(
                 (playerHand.getHandValue() == 21) ||
                 (playerHand.getHandValue() < 21 && computerHand.getHandValue() > 21) ||
