@@ -34,11 +34,18 @@
             /* Splitting the string into an array of strings, and then adding the value of the card to
             the handValue variable. */
             String drewCard = card.Split(" ")[0];
+            int numberOfAce = 0;
 
             /* Adding the value of the card to the handValue variable. */
-            if (drewCard.Equals("Ace")) handValue += 11;
+            if (drewCard.Equals("Ace"))
+            {
+                handValue += 1;
+                numberOfAce += 1;
+            }
             else if (drewCard.Equals("Jack") || drewCard.Equals("King") || drewCard.Equals("Queen")) handValue += 10;
             else handValue += Convert.ToInt16(drewCard);
+
+            if (numberOfAce >= 1 && (handValue + 10 == 21)) handValue += 10;
         }
     }
 }

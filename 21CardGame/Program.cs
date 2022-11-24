@@ -43,23 +43,14 @@
             draw("computer");
             draw("computer");
 
-            /* Checking if the player or computer has a winning hand. If neither has a winning hand,
-            the function calls the turnPlayer() and turnComputer() functions. */
-            while (!haveWinner)
-            {
-                turnPlayer();
-                turnComputer();
-                Console.WriteLine("\n----------------------------------------\n");
-
-                /* It checks if the player's hand value is greater than or equal to 21 and the
-                computer's hand value is greater than or equal to 21. If both are true, it calls the
-                checkWinner() function and breaks out of the loop. */
-                if (playerHand.getHandValue() >= 21 && computerHand.getHandValue() >= 21)
-                {
-                    checkWinner();
-                    break;
-                }
-            }
+            turnPlayer();
+            if(playerHand.getHandValue() < 21) turnComputer();
+            Console.WriteLine("\n----------------------------------------\n");
+            card.displayCards("player");
+            Console.WriteLine("\n------------------ VS ------------------\n");
+            card.displayCards("computer");
+            Console.WriteLine("\n----------------------------------------\n");
+            assessWinner();
         }
 
         /// <summary>
@@ -133,13 +124,7 @@
         /// </summary>
         public void turnComputer()
         {
-            Random random = new Random();
-
-            /* Checking if the computer's hand value is greater than 21, if it is, it will pass. If the
-            computer's hand value is less than 21, it will draw. If the computer's hand value is 21,
-            it will pass. */
-            if(random.NextInt64(1, 3) == 2 || computerHand.getHandValue() > 21) pass("computer");
-            else if ((computerHand.getHandValue() != 21 && computerHand.getHandValue() < 21) || (playerHand.getHandValue() > 21 && computerHand.getHandValue() < 21) || computerHand.getHandValue() < 21)
+            while(computerHand.getHandValue() < 17)
             {
                 draw("computer");
                 Console.WriteLine("Computer drew a card.");
@@ -156,51 +141,44 @@
             the user to choose between two options. If the user chooses to draw, it will draw a card
             for the player and display the player's hand value. If the player's hand value is
             greater than 21, it will display a message. */
-            if (playerHand.getHandValue() <= 21)
+            while(playerHand.getHandValue() < 21)
             {
                 if (queryChoice().Equals("1"))
                 {
                     draw("player");
                     Console.WriteLine("Total hand value is " + playerHand.getHandValue());
                     Console.WriteLine("\n----------------------------------------\n");
+
+                    if(playerHand.getHandValue() > 21) Console.WriteLine("No hope for victory");
                 }
-            }
-            else
-            {
-                Console.WriteLine("No hope for victory");
-                Console.WriteLine("\n----------------------------------------\n");
+                else break;
             }
         }
 
         /// <summary>
         /// This function checks the winner of the game.
         /// </summary>
-        public void checkWinner()
+        public void assessWinner()
         {
-            /* Checking the winner of the game. */
-            if((playerHand.getHandValue() > 21 && computerHand.getHandValue() > 21) || (playerHand.getHandValue() > 21 && computerHand.getHandValue() == 21))
+            if(playerHand.getHandValue() > 21 && computerHand.getHandValue() < 21) Console.WriteLine("Game ended. You are BUST!");
+            else if((playerHand.getHandValue() == 21 && computerHand.getHandValue() == 21) || (playerHand.getHandValue() == computerHand.getHandValue()))
             {
-                Console.WriteLine("Hand of Player with a value of " + playerHand.getHandValue());
-                card.displayCards("player");
-                Console.WriteLine("\n------------------ VS ------------------\n");
-                Console.WriteLine("Hand of Computer with a value of " + computerHand.getHandValue());
-                card.displayCards("computer");
-                Console.WriteLine("\n----------------------------------------\n");
-                Console.WriteLine("You lose! Try again next time!");
+                Console.WriteLine("Game ended in DRAW!");
             }
-            else if (playerHand.getHandValue() == 21 && computerHand.getHandValue() == 21)
+            else if(
+                (computerHand.getHandValue() == 21) ||
+                ((computerHand.getHandValue() < 21 && playerHand.getHandValue() > 21) ||
+                ((computerHand.getHandValue() < 21 && playerHand.getHandValue() < 21) && (computerHand.getHandValue() > playerHand.getHandValue())))
+            )
             {
-                Console.WriteLine("\n----------------------------------------\n");
-                Console.WriteLine("Game ends in a draw!");
+                Console.WriteLine("Game ended. Dealer wins!");
             }
-            else if (playerHand.getHandValue() == 21 && computerHand.getHandValue() > 21)
+            else if(
+                (playerHand.getHandValue() == 21) ||
+                (playerHand.getHandValue() < 21 && computerHand.getHandValue() > 21) ||
+                ((playerHand.getHandValue() < 21 && computerHand.getHandValue() < 21) && (playerHand.getHandValue() > computerHand.getHandValue()))
+            )
             {
-                Console.WriteLine("Hand of Player with a value of " + playerHand.getHandValue());
-                card.displayCards("player");
-                Console.WriteLine("\n------------------ VS ------------------\n");
-                Console.WriteLine("Hand of Computer with a value of " + computerHand.getHandValue());
-                card.displayCards("computer");
-                Console.WriteLine("\n----------------------------------------\n");
                 Console.WriteLine("Congratulations! You win!");
             }
         }
