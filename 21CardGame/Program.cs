@@ -20,10 +20,11 @@ namespace Program
             main.startGame();
         }
 
+        
         /// <summary>
-        /// The function starts the game by drawing two cards for the player and the computer, then it
-        /// loops through the player and computer playing their hands until one of them has a hand value
-        /// of 21 or greater.
+        /// The function starts the game by drawing two cards for the player and the computer, then the
+        /// player plays, then the computer plays, then the cards are displayed, and finally the result
+        /// is displayed.
         /// </summary>
         public void startGame()
         {
@@ -33,9 +34,9 @@ namespace Program
             if(hand_of_player.obtainHandValue() <= 21) computerPlay();
             Console.WriteLine("\n*************************************\n");
             card.displayCards("player");
-            Console.WriteLine("\n------------------ VS ------------------\n");
+            Console.WriteLine("\n****************** VS ******************\n");
             card.displayCards("computer");
-            Console.WriteLine("\n----------------------------------------\n");
+            Console.WriteLine("\n*************************************\n");
             displayResult();
         }
 
@@ -54,7 +55,7 @@ namespace Program
         }
 
         /// <summary>
-        /// If the computer's hand value is less than 21, the computer will draw a card
+        /// The computer draws cards until it has a hand value of 17 or greater
         /// </summary>
         public void computerPlay()
         {
@@ -66,8 +67,9 @@ namespace Program
         }
 
         /// <summary>
-        /// If the player's hand value is less than or equal to 21, and the player chooses to draw, then
-        /// draw a card for the player.
+        /// The playerPlay() function is a while loop that asks the user for input, and if the user
+        /// inputs 1, the player draws a card, and the hand value is displayed. If the hand value is
+        /// greater than 21, the player loses
         /// </summary>
         public void playerPlay()
         {
@@ -77,7 +79,7 @@ namespace Program
                 {
                     draw("player");
                     Console.WriteLine("Total hand value is " + hand_of_player.obtainHandValue());
-                    Console.WriteLine("\n----------------------------------------\n");
+                    Console.WriteLine("\n****************************************\n");
 
                     if (hand_of_player.obtainHandValue() > 21) Console.WriteLine("No hope for victory");
                 }
@@ -139,11 +141,21 @@ namespace Program
             }
         }
 
-        /// <summary>
-        /// It displays the result of the game
-        /// </summary>
+        
         public void displayResult()
         {
+        /// <summary>
+        /// If the player's hand value is greater than 21 and the computer's hand value is less than 21,
+        /// the player is bust. If both the player's hand value and the computer's hand value are 21, or
+        /// if both the player's hand value and the computer's hand value are equal, the game ends in a
+        /// draw. If the computer's hand value is 21, or if the computer's hand value is less than 21
+        /// and the player's hand value is greater than 21, or if the computer's hand value is less than
+        /// 21 and the player's hand value is less than 21 and the computer's hand value is greater than
+        /// the player's hand value, the dealer wins. If the player's hand value is 21, or if the
+        /// player's hand value is less than 21 and the computer's hand value is greater than 21, or if
+        /// the player's hand value is less than 21 and the computer's hand value is less than 21 and
+        /// the player's hand value is greater than
+        /// </summary>
             if (hand_of_player.obtainHandValue() > 21 && hand_of_computer.obtainHandValue() < 21) Console.WriteLine("Game ended. You are BUST!");
             else if ((hand_of_player.obtainHandValue() == 21 && hand_of_computer.obtainHandValue() == 21) || (hand_of_player.obtainHandValue() == hand_of_computer.obtainHandValue()))
             {
