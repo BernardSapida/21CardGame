@@ -28,12 +28,12 @@
         /// This function takes a string as a parameter, splits the string into an array of strings, and
         /// then adds the value of the card to the handValue variable
         /// </summary>
-        /// <param name="String">card</param>
-        public void addHandValue(String card)
+        /// <param name="string">card</param>
+        public void addHandValue(string card)
         {
             /* Splitting the string into an array of strings, and then adding the value of the card to
             the handValue variable. */
-            String drewCard = card.Split(" ")[0];
+            string drewCard = card.Split(" ")[0];
             int numberOfAce = 0;
 
             /* Adding the value of the card to the handValue variable. */

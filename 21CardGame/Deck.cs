@@ -2,7 +2,7 @@
 {
     internal class Deck
     {
-        private String[] deck =
+        private string[] deck =
         {
             "Ace of Spades",
             "2 of Spades",
@@ -57,7 +57,7 @@
             "King of Diamonds",
             "Queen of Diamonds",
         };
-        private String[] shuffledDeck = new string[52];
+        private string[] shuffledDeck = new string[52];
         private Random random = new Random();
 
         /// <summary>
@@ -80,10 +80,10 @@
         /// <returns>
         /// A card from the deck.
         /// </returns>
-        public String drawNewCard()
+        public string drawNewCard()
         {
             long DREW_CARD_INDEX = random.NextInt64(0, 52);
-            String DREW_CARD = shuffledDeck[DREW_CARD_INDEX];
+            string DREW_CARD = shuffledDeck[DREW_CARD_INDEX];
 
             /* Checking to see if the card that was drawn is empty. If it is, then it will draw a new
             card. */

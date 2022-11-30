@@ -2,15 +2,15 @@
 {
     internal class Card
     {
-        private String[] playerCards = { };
-        private String[] computerCards = { };
+        private string[] playerCards = { };
+        private string[] computerCards = { };
 
         /// <summary>
         /// It adds a card to the player's or computer's hand
         /// </summary>
-        /// <param name="String">currentPlayer</param>
-        /// <param name="String">currentPlayer</param>
-        public void addCard(String currentPlayer, String card)
+        /// <param name="string">currentPlayer</param>
+        /// <param name="string">currentPlayer</param>
+        public void addCard(string currentPlayer, string card)
         {
             /* Calling the function `extendsCardsLength` and passing the parameter `currentPlayer` to
             it. */
@@ -26,8 +26,8 @@
         /// <summary>
         /// This function displays the cards of the player or computer
         /// </summary>
-        /// <param name="String">currentPlayer</param>
-        public void displayCards(String currentPlayer)
+        /// <param name="string">currentPlayer</param>
+        public void displayCards(string currentPlayer)
         {
             /* It's displaying the cards of the player. */
             if (currentPlayer.Equals("player"))
@@ -53,14 +53,14 @@
         /// 
         /// The reason I'm doing this is because I want to add a new element to the array.
         /// </summary>
-        /// <param name="String">currentPlayer</param>
-        public void extendsCardsLength(String currentPlayer)
+        /// <param name="string">currentPlayer</param>
+        public void extendsCardsLength(string currentPlayer)
         {
             /* It's creating a new array that is one element larger than the playerCards array and
             copies the contents of the playerCards array into the new array. */
             if (currentPlayer.Equals("player"))
             {
-                String[] tempArray = new string[playerCards.Length + 1];
+                string[] tempArray = new string[playerCards.Length + 1];
                 playerCards.CopyTo(tempArray, 0);
                 playerCards = tempArray;
             }
@@ -69,7 +69,7 @@
             copies the contents of the computerCards array into the new array. */
             if (currentPlayer.Equals("computer"))
             {
-                String[] tempArray = new string[computerCards.Length + 1];
+                string[] tempArray = new string[computerCards.Length + 1];
                 computerCards.CopyTo(tempArray, 0);
                 computerCards = tempArray;
             }

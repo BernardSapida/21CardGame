@@ -6,8 +6,8 @@
         private Deck deck = new Deck();
         private Hand playerHand = new Hand();
         private Hand computerHand = new Hand();
-        private Boolean haveWinner = false;
-        private static String drawCard = "";
+        private bool haveWinner = false;
+        private static string drawCard = "";
 
         /// <summary>
         /// The main function is the entry point of the program
@@ -68,7 +68,7 @@
         /// <returns>
         /// The choice of the player.
         /// </returns>
-        public String queryChoice()
+        public string queryChoice()
         {
             /* Asking the user to choose between two options, and if the user doesn't choose one of the
             two options, it asks the user again. */
@@ -94,8 +94,8 @@
         /// <summary>
         /// The draw function draws a card from the deck and adds it to the player's hand
         /// </summary>
-        /// <param name="String">player</param>
-        public void draw(String player)
+        /// <param name="string">player</param>
+        public void draw(string player)
         {
             /* Checking if the player is equal to player. If it is, it will draw a card from the deck,
             display the card that the player drew, add the card to the player's hand, and add the
@@ -120,8 +120,8 @@
         /// <summary>
         /// The function `pass` takes a string as an argument and prints it to the console
         /// </summary>
-        /// <param name="String">The type of data that the parameter is.</param>
-        public void pass(String player)
+        /// <param name="string">The type of data that the parameter is.</param>
+        public void pass(string player)
         {
             Console.WriteLine(player + " passed...");
         }
