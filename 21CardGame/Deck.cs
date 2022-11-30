@@ -2,7 +2,7 @@
 {
     internal class Deck
     {
-        public String[] deck =
+        public string[] deck =
         {
             "Ace of Spades",
             "2 of Spades",
@@ -60,7 +60,7 @@
             "King of Diamonds",
             "Queen of Diamonds",
         };
-        public String[] shuffledDeck = new string[52];
+        public string[] shuffledDeck = new string[52];
 
         /// <summary>
         /// The function shuffles the deck by randomly ordering the cards in the deck.
@@ -83,12 +83,12 @@
         /// <returns>
         /// A random card from the deck.
         /// </returns>
-        public String drawCard()
+        public string drawCard()
         {
             Random random = new Random();
 
             long index = random.NextInt64(0, 52);
-            String card_drew = shuffledDeck[index];
+            string card_drew = shuffledDeck[index];
 
             while (card_drew == "DREW")
             {

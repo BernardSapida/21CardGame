@@ -8,7 +8,7 @@ namespace Program
         public Hand hand_of_computer = new Hand();
         public Deck deck = new Deck();
         public Card card = new Card();
-        public static String drawCard = "";
+        public static string drawCard = "";
 
         /// <summary>
         /// The main function is the entry point of the program
@@ -94,7 +94,7 @@ namespace Program
         /// <returns>
         /// The user's choice.
         /// </returns>
-        public String askUserInput()
+        public string askUserInput()
         {
             Console.WriteLine("Player, would you like to draw or pass?");
             Console.WriteLine("[1] Draw");
@@ -122,8 +122,8 @@ namespace Program
         /// <summary>
         /// The function draws a card from the deck and adds it to the player's hand
         /// </summary>
-        /// <param name="String">player</param>
-        public void draw(String player)
+        /// <param name="string">player</param>
+        public void draw(string player)
         {
             if (player.Equals("player"))
             {

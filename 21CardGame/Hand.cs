@@ -10,10 +10,10 @@
         /// value_in_hand variable. If it's not, it converts the first element of the array to an
         /// integer and adds it to the value_in_hand variable
         /// </summary>
-        /// <param name="String">playerCard</param>
-        public void incrementHandValue(String playerCard)
+        /// <param name="string">playerCard</param>
+        public void incrementHandValue(string playerCard)
         {
-            String card_drew = playerCard.Split(" ")[0];
+            string card_drew = playerCard.Split(" ")[0];
 
             if (card_drew.Equals("Ace"))
             {
